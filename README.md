@@ -259,20 +259,8 @@ Este proyecto está bajo la **Licencia MIT** - mira el archivo `LICENSE` para de
 
 ## 👨‍💻 Autor
 
-**Tu Nombre**
-- 🌐 [Tu Website](https://tu-website.com)
-- 📧 [tu-email@example.com](mailto:tu-email@example.com)
-- 🐦 [@tu_twitter](https://twitter.com/tu_twitter)
-- 💼 [LinkedIn](https://linkedin.com/in/tu-perfil)
 
-## 🙏 Agradecimientos
 
-- **CSS Tricks** - Por los tutoriales de CSS 3D
-- **MDN Web Docs** - Por la documentación completa
-- **Google Fonts** - Por la tipografía Orbitron
-- **La comunidad web** - Por la inspiración constante
-
----
 
 ## 📸 Capturas de Pantalla
 
@@ -318,5 +306,6 @@ Este proyecto está bajo la **Licencia MIT** - mira el archivo `LICENSE` para de
 ---
 
 🎮 **¡Disfruta jugando Snake 3D!** 🐍✨
+
 
 *¿Encontraste un bug o tienes una idea genial? ¡Abre un issue y hablemos!* 💬
