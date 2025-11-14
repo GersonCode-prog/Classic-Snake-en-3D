@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake 3D - Perspectiva CSS</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-info">
+            <h1>Snake 3D</h1>
+            <div class="score-board">
+                <div class="score">Puntuación: <span id="score">0</span></div>
+                <div class="high-score">Mejor puntuación: <span id="highScore">0</span></div>
+            </div>
+            <div class="style-selector">
+                <label for="snakeStyle">Estilo de Snake:</label>
+                <select id="snakeStyle">
+                    <option value="classic">Clásico</option>
+                    <option value="neon">Neón</option>
+                    <option value="fire">Fuego</option>
+                    <option value="crystal">Cristal</option>
+                    <option value="golden">Dorado</option>
+                </select>
+            </div>
+            <div class="controls">
+                <p class="control-text">Usa WASD, flechas o controles táctiles</p>
+                <button id="startBtn">Iniciar Juego</button>
+                <button id="pauseBtn" style="display: none;">Pausa</button>
+                <button id="restartBtn" style="display: none;">Reiniciar</button>
+            </div>
+        </div>
+        
+        <div class="game-container">
+            <div class="start-screen" id="startScreen">
+                <div class="start-content">
+                    <h2>¡Bienvenido a Snake 3D!</h2>
+                    <p>Experimenta el clásico juego de Snake con efectos 3D impresionantes</p>
+                    <div class="features">
+                        <ul>
+                            <li>🎨 5 estilos únicos de Snake</li>
+                            <li>🍎 6 tipos diferentes de frutas</li>
+                            <li>✨ Efectos especiales y power-ups</li>
+                            <li>🎮 Perspectiva 3D con CSS</li>
+                        </ul>
+                    </div>
+                    <button id="startGameBtn" class="start-button" onclick="startMainGame()">¡Comenzar a Jugar!</button>
+                </div>
+            </div>
+            <div class="game-board" id="gameBoard" style="display: none;">
+                <!-- La serpiente y la comida se generarán dinámicamente -->
+            </div>
+            
+            <!-- Controles táctiles para móvil -->
+            <div class="mobile-controls" id="mobileControls" style="display: none;">
+                <div class="dpad">
+                    <button class="dpad-btn dpad-up" data-direction="up">
+                        <span>▲</span>
+                    </button>
+                    <div class="dpad-middle">
+                        <button class="dpad-btn dpad-left" data-direction="left">
+                            <span>◄</span>
+                        </button>
+                        <div class="dpad-center"></div>
+                        <button class="dpad-btn dpad-right" data-direction="right">
+                            <span>►</span>
+                        </button>
+                    </div>
+                    <button class="dpad-btn dpad-down" data-direction="down">
+                        <span>▼</span>
+                    </button>
+                </div>
+                
+                <div class="mobile-action-buttons">
+                    <button class="mobile-btn" id="mobilePauseBtn">⏸️ Pausa</button>
+                    <button class="mobile-btn" id="mobileRestartBtn">🔄 Reiniciar</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-over-overlay" id="gameOverOverlay">
+            <div class="game-over-content">
+                <h2>Game Over</h2>
+                <p>Puntuación final: <span id="finalScore">0</span></p>
+                <div class="game-over-buttons">
+                    <button onclick="restartGame()">Jugar de nuevo</button>
+                    <button onclick="backToMenu()">Menú principal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js.js"></script>
+</body>
+</html>

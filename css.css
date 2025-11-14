@@ -1,0 +1,907 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', monospace;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.game-info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    color: #00ff88;
+    text-shadow: 0 0 10px #00ff88;
+}
+
+.game-info h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.score-board {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.style-selector {
+    margin-bottom: 15px;
+}
+
+.style-selector label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #00ccff;
+}
+
+.style-selector select {
+    background: linear-gradient(45deg, #1a1a2e, #16213e);
+    color: #00ff88;
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 255, 136, 0.2);
+}
+
+.style-selector select:hover {
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+    transform: translateY(-1px);
+}
+
+.style-selector select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.3);
+}
+
+.score, .high-score {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.controls {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.controls button {
+    margin: 10px 5px 0 0;
+    padding: 8px 16px;
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    color: #0f0f23;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+}
+
+.game-container {
+    perspective: 1000px;
+    perspective-origin: center center;
+}
+
+.start-screen {
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.9));
+    border: 3px solid #00ff88;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transform: rotateX(15deg) rotateY(5deg);
+    box-shadow: 
+        0 0 50px rgba(0, 255, 136, 0.3),
+        inset 0 0 50px rgba(0, 255, 136, 0.1);
+    animation: startScreenFloat 4s ease-in-out infinite;
+}
+
+@keyframes startScreenFloat {
+    0%, 100% { 
+        transform: rotateX(15deg) rotateY(5deg) translateZ(0px);
+    }
+    50% { 
+        transform: rotateX(20deg) rotateY(-5deg) translateZ(10px);
+    }
+}
+
+.start-content {
+    text-align: center;
+    color: #00ff88;
+    padding: 40px;
+    max-width: 500px;
+}
+
+.start-content h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.start-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.features {
+    margin-bottom: 40px;
+}
+
+.features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.features li {
+    font-size: 1rem;
+    margin: 12px 0;
+    padding: 8px 15px;
+    background: rgba(0, 255, 136, 0.1);
+    border-radius: 25px;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.start-button {
+    padding: 18px 40px;
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    color: #0f0f23;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.4rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 8px 25px rgba(0, 255, 136, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.start-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 12px 35px rgba(0, 255, 136, 0.6),
+        inset 0 3px 8px rgba(255, 255, 255, 0.3);
+}
+
+.start-button:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.game-board {
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(45deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 255, 0.1));
+    border: 3px solid #00ff88;
+    border-radius: 15px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(15deg) rotateY(5deg);
+    box-shadow: 
+        0 0 50px rgba(0, 255, 136, 0.3),
+        inset 0 0 50px rgba(0, 255, 136, 0.1);
+    animation: boardFloat 6s ease-in-out infinite;
+}
+
+@keyframes boardFloat {
+    0%, 100% { transform: rotateX(15deg) rotateY(5deg) translateZ(0px); }
+    50% { transform: rotateX(20deg) rotateY(-5deg) translateZ(10px); }
+}
+
+.grid-cell {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    transform-style: preserve-3d;
+}
+
+.snake-segment {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    transform-style: preserve-3d;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estilos base para diferentes tipos de snake */
+.snake-head {
+    animation: headPulse 1.5s ease-in-out infinite;
+    transform: translateZ(15px);
+    z-index: 10;
+    position: relative;
+}
+
+/* Snake Clásico (por defecto) */
+.snake-head.classic {
+    background: linear-gradient(145deg, #ff4757, #ff3838);
+    box-shadow: 
+        0 4px 15px rgba(255, 71, 87, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3),
+        0 0 20px rgba(255, 71, 87, 0.6);
+    border: 2px solid #ff6b7a;
+}
+
+/* Snake Neón */
+.snake-head.neon {
+    background: linear-gradient(145deg, #00ff88, #00ccff);
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 136, 0.6),
+        inset 0 2px 5px rgba(255, 255, 255, 0.4),
+        0 0 25px rgba(0, 255, 136, 0.8),
+        0 0 50px rgba(0, 204, 255, 0.4);
+    border: 2px solid #00ff88;
+    animation: neonPulse 1s ease-in-out infinite;
+}
+
+/* Snake Fuego */
+.snake-head.fire {
+    background: linear-gradient(145deg, #ff6b35, #f7931e, #ff4757);
+    box-shadow: 
+        0 4px 15px rgba(255, 107, 53, 0.6),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(255, 107, 53, 0.8);
+    border: 2px solid #ff8c42;
+    animation: firePulse 0.8s ease-in-out infinite;
+}
+
+/* Snake Cristal */
+.snake-head.crystal {
+    background: linear-gradient(145deg, #74b9ff, #0984e3, #6c5ce7);
+    box-shadow: 
+        0 4px 15px rgba(116, 185, 255, 0.5),
+        inset 0 3px 8px rgba(255, 255, 255, 0.6),
+        0 0 25px rgba(116, 185, 255, 0.7);
+    border: 2px solid #74b9ff;
+    backdrop-filter: blur(2px);
+}
+
+/* Snake Dorado */
+.snake-head.golden {
+    background: linear-gradient(145deg, #ffd700, #ffaa00, #ff8c00);
+    box-shadow: 
+        0 4px 15px rgba(255, 215, 0, 0.6),
+        inset 0 2px 8px rgba(255, 255, 255, 0.5),
+        0 0 30px rgba(255, 215, 0, 0.8);
+    border: 2px solid #ffc107;
+    animation: goldenShine 1.5s ease-in-out infinite;
+}
+
+/* Animaciones especiales para cada estilo de snake */
+@keyframes neonPulse {
+    0%, 100% { 
+        transform: translateZ(15px) scale(1);
+        box-shadow: 
+            0 4px 15px rgba(0, 255, 136, 0.6),
+            inset 0 2px 5px rgba(255, 255, 255, 0.4),
+            0 0 25px rgba(0, 255, 136, 0.8),
+            0 0 50px rgba(0, 204, 255, 0.4);
+    }
+    50% { 
+        transform: translateZ(20px) scale(1.05);
+        box-shadow: 
+            0 6px 25px rgba(0, 255, 136, 0.8),
+            inset 0 2px 8px rgba(255, 255, 255, 0.5),
+            0 0 40px rgba(0, 255, 136, 1),
+            0 0 80px rgba(0, 204, 255, 0.6);
+    }
+}
+
+@keyframes firePulse {
+    0%, 100% { 
+        transform: translateZ(15px) scale(1) rotateZ(0deg);
+        box-shadow: 
+            0 4px 15px rgba(255, 107, 53, 0.6),
+            inset 0 2px 5px rgba(255, 255, 255, 0.3),
+            0 0 30px rgba(255, 107, 53, 0.8);
+    }
+    25% { 
+        transform: translateZ(18px) scale(1.02) rotateZ(1deg);
+    }
+    50% { 
+        transform: translateZ(20px) scale(1.05) rotateZ(-1deg);
+        box-shadow: 
+            0 6px 25px rgba(255, 107, 53, 0.8),
+            inset 0 2px 8px rgba(255, 255, 255, 0.4),
+            0 0 40px rgba(255, 107, 53, 1);
+    }
+    75% { 
+        transform: translateZ(18px) scale(1.02) rotateZ(1deg);
+    }
+}
+
+@keyframes goldenShine {
+    0%, 100% { 
+        transform: translateZ(15px) scale(1);
+        box-shadow: 
+            0 4px 15px rgba(255, 215, 0, 0.6),
+            inset 0 2px 8px rgba(255, 255, 255, 0.5),
+            0 0 30px rgba(255, 215, 0, 0.8);
+    }
+    50% { 
+        transform: translateZ(20px) scale(1.03);
+        box-shadow: 
+            0 6px 25px rgba(255, 215, 0, 0.8),
+            inset 0 3px 10px rgba(255, 255, 255, 0.7),
+            0 0 50px rgba(255, 215, 0, 1);
+    }
+}
+
+/* Cuerpos de snake según el estilo */
+.snake-body.classic {
+    background: linear-gradient(145deg, #00ff88, #00cc6a);
+    box-shadow: 
+        0 2px 10px rgba(0, 255, 136, 0.3),
+        inset 0 1px 3px rgba(255, 255, 255, 0.2);
+    border: 1px solid #00ff88;
+}
+
+.snake-body.neon {
+    background: linear-gradient(145deg, #00ff88, #00ccff);
+    box-shadow: 
+        0 2px 10px rgba(0, 255, 136, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 0.3),
+        0 0 15px rgba(0, 255, 136, 0.3);
+    border: 1px solid #00ff88;
+}
+
+.snake-body.fire {
+    background: linear-gradient(145deg, #ff8c42, #ff6b35);
+    box-shadow: 
+        0 2px 10px rgba(255, 107, 53, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 0.2),
+        0 0 15px rgba(255, 107, 53, 0.3);
+    border: 1px solid #ff8c42;
+}
+
+.snake-body.crystal {
+    background: linear-gradient(145deg, #74b9ff, #0984e3);
+    box-shadow: 
+        0 2px 10px rgba(116, 185, 255, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.4),
+        0 0 15px rgba(116, 185, 255, 0.3);
+    border: 1px solid #74b9ff;
+    backdrop-filter: blur(1px);
+}
+
+.snake-body.golden {
+    background: linear-gradient(145deg, #ffc107, #ff8c00);
+    box-shadow: 
+        0 2px 10px rgba(255, 193, 7, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 0.3),
+        0 0 15px rgba(255, 193, 7, 0.3);
+    border: 1px solid #ffc107;
+}
+
+.snake-segment.turning {
+    animation: segmentTurn 0.3s ease-out;
+}
+
+@keyframes segmentTurn {
+    0% { transform: rotateZ(0deg) scale(1); }
+    50% { transform: rotateZ(10deg) scale(1.1); }
+    100% { transform: rotateZ(0deg) scale(1); }
+}
+
+/* Tipos de frutas */
+.food {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transform: translateZ(10px);
+    animation: foodFloat 2s ease-in-out infinite;
+    border: 2px solid;
+}
+
+/* Manzana (básica) */
+.food.apple {
+    background: radial-gradient(circle, #ff4757, #c44569);
+    box-shadow: 
+        0 0 20px rgba(255, 71, 87, 0.6),
+        0 0 40px rgba(255, 71, 87, 0.3),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    border-color: #ff6b7a;
+}
+
+/* Banana (velocidad) */
+.food.banana {
+    background: radial-gradient(ellipse, #ffd700, #ffaa00);
+    box-shadow: 
+        0 0 20px rgba(255, 215, 0, 0.6),
+        0 0 40px rgba(255, 215, 0, 0.3),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    border-color: #ffcc33;
+    border-radius: 40% 60% 60% 40%;
+    animation: bananaWiggle 1.5s ease-in-out infinite;
+}
+
+/* Uva (puntos extra) */
+.food.grape {
+    background: radial-gradient(circle, #6c5ce7, #5f3dc4);
+    box-shadow: 
+        0 0 20px rgba(108, 92, 231, 0.6),
+        0 0 40px rgba(108, 92, 231, 0.3),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    border-color: #7c6ce8;
+}
+
+/* Cereza (doble puntos) */
+.food.cherry {
+    background: radial-gradient(circle, #e84393, #d63031);
+    box-shadow: 
+        0 0 20px rgba(232, 67, 147, 0.6),
+        0 0 40px rgba(232, 67, 147, 0.3),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    border-color: #f368a7;
+    animation: cherryBounce 1s ease-in-out infinite;
+}
+
+/* Naranja (crecimiento) */
+.food.orange {
+    background: radial-gradient(circle, #fd79a8, #fdcb6e);
+    box-shadow: 
+        0 0 20px rgba(253, 121, 168, 0.6),
+        0 0 40px rgba(253, 121, 168, 0.3),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    border-color: #ff7675;
+}
+
+/* Fresa especial (todos los efectos) */
+.food.strawberry {
+    background: conic-gradient(from 45deg, #ff6b6b, #ff8e8e, #ff6b6b, #ff4757);
+    box-shadow: 
+        0 0 25px rgba(255, 107, 107, 0.8),
+        0 0 50px rgba(255, 107, 107, 0.4),
+        inset 0 3px 8px rgba(255, 255, 255, 0.4);
+    border-color: #ff7675;
+    animation: strawberrySpecial 1s ease-in-out infinite;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+/* Animaciones específicas para frutas */
+@keyframes bananaWiggle {
+    0%, 100% { 
+        transform: translateZ(10px) rotateZ(0deg) scaleX(1);
+    }
+    25% { 
+        transform: translateZ(15px) rotateZ(5deg) scaleX(1.1);
+    }
+    50% { 
+        transform: translateZ(20px) rotateZ(0deg) scaleX(1);
+    }
+    75% { 
+        transform: translateZ(15px) rotateZ(-5deg) scaleX(1.1);
+    }
+}
+
+@keyframes cherryBounce {
+    0%, 100% { 
+        transform: translateZ(10px) scale(1);
+    }
+    50% { 
+        transform: translateZ(25px) scale(1.2);
+        box-shadow: 
+            0 0 30px rgba(232, 67, 147, 0.8),
+            0 0 60px rgba(232, 67, 147, 0.5),
+            inset 0 3px 8px rgba(255, 255, 255, 0.4);
+    }
+}
+
+@keyframes strawberrySpecial {
+    0%, 100% { 
+        transform: translateZ(10px) scale(1) rotateZ(0deg);
+        box-shadow: 
+            0 0 25px rgba(255, 107, 107, 0.8),
+            0 0 50px rgba(255, 107, 107, 0.4),
+            inset 0 3px 8px rgba(255, 255, 255, 0.4);
+    }
+    25% { 
+        transform: translateZ(20px) scale(1.1) rotateZ(90deg);
+    }
+    50% { 
+        transform: translateZ(30px) scale(1.3) rotateZ(180deg);
+        box-shadow: 
+            0 0 40px rgba(255, 107, 107, 1),
+            0 0 80px rgba(255, 107, 107, 0.6),
+            inset 0 4px 12px rgba(255, 255, 255, 0.5);
+    }
+    75% { 
+        transform: translateZ(20px) scale(1.1) rotateZ(270deg);
+    }
+}
+
+.game-over-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.game-over-content {
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: #00ff88;
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
+    transform: scale(0.8);
+    animation: popIn 0.5s ease-out forwards;
+}
+
+@keyframes popIn {
+    to { transform: scale(1); }
+}
+
+.game-over-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #ff4757;
+    text-shadow: 0 0 10px #ff4757;
+}
+
+.game-over-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.game-over-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.game-over-content button {
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    color: #0f0f23;
+    border: none;
+    border-radius: 30px;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+    min-width: 150px;
+}
+
+.game-over-content button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 136, 0.6);
+}
+
+.game-over-content button:last-child {
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.game-over-content button:last-child:hover {
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+}
+
+/* Efectos de partículas cuando se come comida */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ffd700;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particleExplode 0.8s ease-out forwards;
+}
+
+@keyframes particleExplode {
+    0% {
+        transform: scale(1) translateZ(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) translateZ(50px);
+        opacity: 0;
+    }
+}
+
+/* Controles móviles */
+.mobile-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.dpad {
+    display: grid;
+    grid-template-areas: 
+        ". up ."
+        "left center right"
+        ". down .";
+    grid-template-columns: 70px 70px 70px;
+    grid-template-rows: 70px 70px 70px;
+    gap: 5px;
+}
+
+.dpad-btn {
+    width: 70px;
+    height: 70px;
+    border: 3px solid #00ff88;
+    background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.9));
+    color: #00ff88;
+    border-radius: 15px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 136, 0.3),
+        inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.dpad-btn:active {
+    transform: scale(0.95);
+    box-shadow: 
+        0 2px 8px rgba(0, 255, 136, 0.4),
+        inset 0 3px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #00ff88, #00ccff);
+    color: #0f0f23;
+}
+
+.dpad-up { grid-area: up; }
+.dpad-left { grid-area: left; }
+.dpad-right { grid-area: right; }
+.dpad-down { grid-area: down; }
+
+.dpad-center {
+    grid-area: center;
+    width: 70px;
+    height: 70px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 2px dashed rgba(0, 255, 136, 0.3);
+    border-radius: 50%;
+}
+
+.mobile-action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.mobile-btn {
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    color: #0f0f23;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-btn:active {
+    transform: translateY(2px) scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 255, 136, 0.4);
+}
+
+/* Ocultar controles móviles en desktop */
+@media (min-width: 769px) {
+    .mobile-controls {
+        display: none !important;
+    }
+}
+
+/* Responsive design mejorado */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    
+    .container {
+        padding: 10px;
+        min-height: 100vh;
+    }
+    
+    .game-info {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .game-info h1 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .score-board {
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 15px;
+    }
+    
+    .style-selector {
+        margin-bottom: 10px;
+    }
+    
+    .controls {
+        margin-bottom: 15px;
+    }
+    
+    .control-text {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .game-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .start-screen {
+        width: min(90vw, 400px);
+        height: min(90vh, 500px);
+        transform: rotateX(5deg) rotateY(0deg);
+        padding: 20px;
+    }
+    
+    .start-content {
+        padding: 20px;
+    }
+    
+    .start-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .start-content p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    
+    .features li {
+        font-size: 0.9rem;
+        margin: 8px 0;
+        padding: 6px 12px;
+    }
+    
+    .start-button {
+        padding: 15px 25px;
+        font-size: 1.1rem;
+    }
+    
+    .game-board {
+        width: min(90vw, 400px);
+        height: min(90vw, 400px);
+        transform: rotateX(5deg) rotateY(0deg);
+        margin-bottom: 120px; /* Espacio para los controles móviles */
+    }
+    
+    .game-over-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .game-over-content h2 {
+        font-size: 2rem;
+    }
+    
+    .game-over-content p {
+        font-size: 1.2rem;
+    }
+    
+    .game-over-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-over-content button {
+        min-width: 200px;
+        font-size: 1rem;
+    }
+    
+    /* Mostrar controles móviles solo en mobile */
+    .mobile-controls {
+        display: flex !important;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Efectos para animación de partículas personalizadas */
+.particle.apple { background: #ff4757; }
+.particle.banana { background: #ffd700; }
+.particle.grape { background: #6c5ce7; }
+.particle.cherry { background: #e84393; }
+.particle.orange { background: #fd79a8; }
+.particle.strawberry { background: #ff6b6b; }
+
+/* Indicadores de efectos activos */
+.effect-indicator {
+    pointer-events: none;
+    user-select: none;
+}
